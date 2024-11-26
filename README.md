@@ -36,32 +36,6 @@ Installation
 
    - This will log output to `/var/log/snapremove.log`.
 
-How It Works
-------------
-1. Fetches all VMs and their corresponding nodes from the Proxmox cluster using the Proxmox API (`pvesh`).
-2. Iterates through each VM and retrieves its snapshots.
-3. Deletes snapshots older than 3 days based on their `snaptime`.
-
-Example Output
---------------
-Manual Run:
-Fetching all VMs from the Proxmox cluster...
-VMID    Node
---------------------
-100     node1
-101     node2
-Processing VMID 100 on node node1...
-Deleting snapshot 'snapshot1' (age: 5 days) for VMID 100 on node node1...
-Snapshot 'snapshot1' deleted successfully.
-Skipping snapshot 'snapshot2' (age: 2 days).
-Snapshot cleanup completed.
-
-Logs:
-When run via `cron`, the logs are stored in `/var/log/snapremove.log`. Example:
-Processing VMID 101 on node node2...
-No snapshots found for VMID 101 on node node2.
-Snapshot cleanup completed.
-
 Notes
 -----
 - Only snapshots older than 3 days are removed.
